@@ -15,7 +15,7 @@
 
 #ifndef __PRINTF_H__
 #define __PRINTF_H__
-
+#ifdef __AVR__
 int serial_putc( char c, FILE * ) 
 {
   Serial.write( c );
@@ -27,5 +27,12 @@ void printf_begin(void)
 {
   fdevopen( &serial_putc, 0 );
 }
+#endif
+#ifdef ESP8266
 
+#define printf(...) os_printf( __VA_ARGS__ )
+#define sprintf(...) os_sprintf( __VA_ARGS__ )
+extern int os_printf_plus(const char * format, ...);
+
+#endif
 #endif // __PRINTF_H__

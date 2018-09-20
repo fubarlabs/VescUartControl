@@ -35,9 +35,14 @@ If you want to use debug, uncomment DEBUGSERIAL and define a port.*/
 #define DEBUGSERIAL Serial
 #endif
 
-#ifdef ARDUINO_AVR_NANO
+#ifdef __AVR_ATmega328P__
 #define SERIALIO Serial  
 #define DEBUGSERIAL Serial
+#endif
+
+#ifdef ESP8266
+#define SERIALIO Serial  
+#define DEBUGSERIAL Serial1
 #endif
 #endif
 
